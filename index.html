@@ -10,10 +10,11 @@
 <title>Asistencia · Ficha 3490221</title>
 <style>
 :root{
-  --v:#006633;--vm:#008040;--vc:#e8f5e9;--vi:#43a047;
-  --r:#c62828;--rc:#ffebee;--a:#f57f17;--ac:#fff8e1;
+  --v:#006633;--vc:#e8f5e9;--vi:#43a047;
+  --r:#c62828;--rc:#ffebee;
+  --a:#f57f17;--ac:#fff8e1;
   --b:#1565c0;--bc:#e3f2fd;
-  --bg:#f4f6f4;--card:#fff;--borde:#e0e0e0;--txt:#757575;--n:#1a1a1a;
+  --bg:#f4f6f4;--card:#fff;--borde:#e0e0e0;--gt:#757575;--n:#1a1a1a;
   --rad:16px;--som:0 2px 12px rgba(0,0,0,.09);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -21,157 +22,148 @@ html,body{height:100%;font-family:'Segoe UI',system-ui,sans-serif;background:var
 button{cursor:pointer;border:none;background:none;font:inherit}
 input{font:inherit}
 
-#pLogin{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;background:linear-gradient(160deg,#003d1f 0%,#006633 55%,#008040 100%)}
-.lg-logo{width:86px;height:86px;border-radius:22px;background:rgba(255,255,255,.13);border:2px solid rgba(255,255,255,.22);display:flex;align-items:center;justify-content:center;font-size:42px;margin-bottom:22px;backdrop-filter:blur(6px)}
-.lg-title{color:#fff;font-size:23px;font-weight:800;text-align:center;margin-bottom:4px;letter-spacing:-.3px}
-.lg-sub{color:rgba(255,255,255,.65);font-size:13px;text-align:center;margin-bottom:34px}
-.lg-card{background:#fff;border-radius:var(--rad);padding:28px 24px;width:100%;max-width:380px;box-shadow:0 8px 32px rgba(0,0,0,.22)}
-.lg-label{font-size:11px;font-weight:700;color:var(--txt);text-transform:uppercase;letter-spacing:.9px;display:block;margin-bottom:8px}
-.lg-input{width:100%;padding:14px 16px;border:2px solid var(--borde);border-radius:10px;font-size:19px;letter-spacing:2px;color:var(--n);outline:none;transition:border .2s;-webkit-appearance:none}
-.lg-input:focus{border-color:var(--v)}
-.lg-input::placeholder{letter-spacing:0;font-size:14px;color:#bbb}
-.lg-btn{margin-top:18px;width:100%;padding:15px;border-radius:10px;background:var(--v);color:#fff;font-size:15px;font-weight:700;transition:background .15s,transform .1s;-webkit-tap-highlight-color:transparent}
-.lg-btn:active{background:#004d26;transform:scale(.98)}
-.lg-err{margin-top:12px;padding:10px 14px;background:var(--rc);border-radius:8px;color:var(--r);font-size:13px;font-weight:500;display:none}
-.lg-err.on{display:block}
-.lg-hint{margin-top:14px;text-align:center;font-size:12px;color:var(--txt)}
+/* LOGIN */
+#pL{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;background:linear-gradient(160deg,#003d1f,#006633 55%,#008040)}
+.logo{width:86px;height:86px;border-radius:22px;background:rgba(255,255,255,.13);border:2px solid rgba(255,255,255,.22);display:flex;align-items:center;justify-content:center;font-size:42px;margin-bottom:22px}
+.tit{color:#fff;font-size:23px;font-weight:800;text-align:center;margin-bottom:4px}
+.sub{color:rgba(255,255,255,.65);font-size:13px;text-align:center;margin-bottom:34px}
+.card{background:#fff;border-radius:var(--rad);padding:28px 24px;width:100%;max-width:380px;box-shadow:0 8px 32px rgba(0,0,0,.22)}
+.lbl{font-size:11px;font-weight:700;color:var(--gt);text-transform:uppercase;letter-spacing:.9px;display:block;margin-bottom:8px}
+.inp{width:100%;padding:14px 16px;border:2px solid var(--borde);border-radius:10px;font-size:19px;letter-spacing:2px;color:var(--n);outline:none;transition:border .2s;-webkit-appearance:none}
+.inp:focus{border-color:var(--v)}
+.inp::placeholder{letter-spacing:0;font-size:14px;color:#bbb}
+.btn{margin-top:18px;width:100%;padding:15px;border-radius:10px;background:var(--v);color:#fff;font-size:15px;font-weight:700;-webkit-tap-highlight-color:transparent}
+.btn:active{background:#004d26;transform:scale(.98)}
+.err{margin-top:12px;padding:10px 14px;background:var(--rc);border-radius:8px;color:var(--r);font-size:13px;font-weight:500;display:none}
+.err.on{display:block}
+.hint{margin-top:14px;text-align:center;font-size:12px;color:var(--gt)}
 
-#pCarga{display:none;min-height:100vh;background:linear-gradient(160deg,#003d1f,#006633);align-items:center;justify-content:center;flex-direction:column;gap:18px}
-.spin{width:52px;height:52px;border:4px solid rgba(255,255,255,.25);border-top-color:#fff;border-radius:50%;animation:girar .8s linear infinite}
-@keyframes girar{to{transform:rotate(360deg)}}
-.c-txt{color:rgba(255,255,255,.85);font-size:14px;font-weight:600}
-.c-sub{color:rgba(255,255,255,.5);font-size:12px;margin-top:-10px}
+/* CARGA */
+#pC{display:none;min-height:100vh;background:linear-gradient(160deg,#003d1f,#006633);align-items:center;justify-content:center;flex-direction:column;gap:18px}
+.spin{width:52px;height:52px;border:4px solid rgba(255,255,255,.25);border-top-color:#fff;border-radius:50%;animation:gir .8s linear infinite}
+@keyframes gir{to{transform:rotate(360deg)}}
+.ct{color:rgba(255,255,255,.85);font-size:14px;font-weight:600}
+.cs{color:rgba(255,255,255,.5);font-size:12px;margin-top:-10px}
 
-#pApp{display:none;min-height:100vh;padding-bottom:28px}
+/* APP */
+#pA{display:none;min-height:100vh;padding-bottom:28px}
 .hdr{background:linear-gradient(135deg,#003d1f,#006633);padding:20px 20px 32px;position:relative;overflow:hidden}
 .hdr::after{content:'';position:absolute;bottom:-20px;left:0;right:0;height:40px;background:var(--bg);border-radius:50% 50% 0 0/30px 30px 0 0}
-.hdr-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
-.hdr-ficha{background:rgba(255,255,255,.18);backdrop-filter:blur(4px);border-radius:20px;padding:4px 12px;font-size:11px;font-weight:700;color:rgba(255,255,255,.9);letter-spacing:.5px}
-.hdr-salir{background:rgba(255,255,255,.15);border-radius:8px;padding:6px 13px;font-size:12px;color:rgba(255,255,255,.85);font-weight:600}
-.hdr-nombre{color:#fff;font-size:21px;font-weight:800;line-height:1.2;margin-bottom:3px}
-.hdr-doc{color:rgba(255,255,255,.6);font-size:12px;font-weight:500}
-.hdr-act{color:rgba(255,255,255,.4);font-size:11px;margin-top:3px}
+.ht{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.ficha{background:rgba(255,255,255,.18);border-radius:20px;padding:4px 12px;font-size:11px;font-weight:700;color:rgba(255,255,255,.9);letter-spacing:.5px}
+.salir{background:rgba(255,255,255,.15);border-radius:8px;padding:6px 13px;font-size:12px;color:rgba(255,255,255,.85);font-weight:600}
+.hn{color:#fff;font-size:21px;font-weight:800;line-height:1.2;margin-bottom:3px}
+.hd{color:rgba(255,255,255,.6);font-size:12px}
+.ha{color:rgba(255,255,255,.4);font-size:11px;margin-top:3px}
 
+/* Métricas */
 .mets{padding:0 16px 14px;display:grid;grid-template-columns:1fr 1fr;gap:11px}
 .mg{grid-column:1/-1;background:var(--card);border-radius:var(--rad);padding:20px;box-shadow:var(--som);display:flex;align-items:center;gap:16px}
-.mg-pct{font-size:50px;font-weight:800;line-height:1;letter-spacing:-2px}
-.mg-inf{flex:1}
-.mg-lbl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--txt);margin-bottom:6px}
+.mp{font-size:50px;font-weight:800;line-height:1;letter-spacing:-2px}
+.mi{flex:1}
+.ml{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--gt);margin-bottom:6px}
 .badge{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:20px;font-size:13px;font-weight:700}
-.bb{background:var(--vc);color:var(--v)}
-.br{background:var(--ac);color:var(--a)}
-.be{background:var(--rc);color:var(--r)}
+.bb{background:var(--vc);color:var(--v)}.ba{background:var(--ac);color:var(--a)}.be{background:var(--rc);color:var(--r)}
 .barra{margin-top:10px;height:6px;background:#e8e8e8;border-radius:3px;overflow:hidden}
 .bf{height:100%;border-radius:3px;transition:width .9s cubic-bezier(.4,0,.2,1)}
 .mm{background:var(--card);border-radius:var(--rad);padding:16px;box-shadow:var(--som)}
-.mm-i{font-size:24px;margin-bottom:5px}
-.mm-n{font-size:30px;font-weight:800;line-height:1;letter-spacing:-1px;margin-bottom:2px}
-.mm-l{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--txt)}
-.cf{color:var(--r)}.ct{color:var(--a)}.ce{color:var(--b)}.ca{color:var(--vi)}
+.mi2{font-size:24px;margin-bottom:5px}
+.mn{font-size:30px;font-weight:800;line-height:1;letter-spacing:-1px;margin-bottom:2px}
+.mlt{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--gt)}
+.cf{color:var(--r)}.cta{color:var(--a)}.ce{color:var(--b)}.ca{color:var(--vi)}
 
+/* Tabs */
 .tabs{padding:0 16px 10px;display:flex;gap:8px}
-.tab{flex:1;padding:10px 4px;border-radius:10px;font-size:12px;font-weight:700;color:var(--txt);background:var(--card);transition:all .18s;-webkit-tap-highlight-color:transparent;box-shadow:var(--som)}
+.tab{flex:1;padding:10px 4px;border-radius:10px;font-size:12px;font-weight:700;color:var(--gt);background:var(--card);box-shadow:var(--som);-webkit-tap-highlight-color:transparent}
 .tab.on{background:var(--v);color:#fff}
-
 .sec{padding:0 16px 12px}
-.sec-t{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--txt);margin-bottom:10px;padding-left:2px}
+.st{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--gt);margin-bottom:10px;padding-left:2px}
 .item{background:var(--card);border-radius:12px;padding:12px 15px;margin-bottom:8px;display:flex;align-items:center;gap:12px;box-shadow:0 1px 5px rgba(0,0,0,.07)}
 .ii{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
-.iok{background:var(--vc)}.if{background:var(--rc)}.it{background:var(--ac)}.ie{background:var(--bc)}
-.i-inf{flex:1;min-width:0}
-.i-f{font-size:14px;font-weight:600;color:var(--n)}
-.i-m{font-size:11px;color:var(--txt);margin-top:1px}
-.itag{font-size:11px;font-weight:700;padding:3px 9px;border-radius:12px;flex-shrink:0}
-.tok{background:var(--vc);color:var(--v)}.tf{background:var(--rc);color:var(--r)}
-.tt{background:var(--ac);color:var(--a)}.te{background:var(--bc);color:var(--b)}
-
+.iok{background:var(--vc)}.iff{background:var(--rc)}.itr{background:var(--ac)}.iex{background:var(--bc)}
+.inf{flex:1;min-width:0}
+.ifec{font-size:14px;font-weight:600}
+.imes{font-size:11px;color:var(--gt);margin-top:1px}
+.tag{font-size:11px;font-weight:700;padding:3px 9px;border-radius:12px;flex-shrink:0}
+.tok{background:var(--vc);color:var(--v)}.tff{background:var(--rc);color:var(--r)}
+.ttr{background:var(--ac);color:var(--a)}.tex{background:var(--bc);color:var(--b)}
 .ic{background:var(--card);border-radius:var(--rad);padding:18px;box-shadow:var(--som);margin-bottom:12px}
 .ic h3{font-size:13px;font-weight:700;color:var(--v);margin-bottom:12px}
-.if2{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--borde);font-size:13px}
-.if2:last-child{border-bottom:none}
-.if2 span:first-child{color:var(--txt)}
-.if2 span:last-child{font-weight:600}
-.vacio{text-align:center;padding:44px 20px;color:var(--txt);font-size:14px}
+.ifl{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--borde);font-size:13px}
+.ifl:last-child{border-bottom:none}
+.ifl span:first-child{color:var(--gt)}
+.ifl span:last-child{font-weight:600}
+.vacio{text-align:center;padding:44px 20px;color:var(--gt);font-size:14px}
 .vi{font-size:44px;margin-bottom:10px}
-.warn{margin:0 16px 12px;padding:14px 16px;border-radius:12px;background:#fff3e0;border:1px solid #ffcc80;font-size:13px;color:#e65100;display:none}
-.warn.on{display:block}
-.warn b{display:block;margin-bottom:3px;font-size:14px}
 @keyframes su{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 .au{animation:su .3s ease both}
 </style>
 </head>
 <body>
 
-<div id="pLogin">
-  <div class="lg-logo">📋</div>
-  <h1 class="lg-title">Control de Asistencia</h1>
-  <p class="lg-sub">SENA · CIDT · Ficha 3490221</p>
-  <div class="lg-card">
-    <label class="lg-label" for="inp">Número de documento</label>
-    <input id="inp" class="lg-input" type="tel" inputmode="numeric"
+<!-- LOGIN -->
+<div id="pL">
+  <div class="logo">📋</div>
+  <h1 class="tit">Control de Asistencia</h1>
+  <p class="sub">SENA · CIDT · Ficha 3490221</p>
+  <div class="card">
+    <label class="lbl" for="inp">Número de documento</label>
+    <input id="inp" class="inp" type="tel" inputmode="numeric"
            pattern="[0-9]*" placeholder="Ej: 1097189805" autocomplete="off"/>
-    <div class="lg-err" id="err">⚠️ Documento no encontrado. Verifica el número.</div>
-    <button class="lg-btn" onclick="ingresar()">Ver mi asistencia</button>
-    <p class="lg-hint">Ingresa tu cédula o documento de identidad</p>
+    <div class="err" id="err">⚠️ Documento no encontrado. Verifica el número.</div>
+    <button class="btn" onclick="login()">Ver mi asistencia</button>
+    <p class="hint">Ingresa tu cédula o documento de identidad</p>
   </div>
 </div>
 
-<div id="pCarga" style="display:none">
+<!-- CARGANDO -->
+<div id="pC">
   <div class="spin"></div>
-  <div class="c-txt">Consultando asistencia...</div>
-  <div class="c-sub">Leyendo Google Sheets</div>
+  <div class="ct">Consultando asistencia...</div>
+  <div class="cs">Conectando con Google Sheets</div>
 </div>
 
-<div id="pApp">
+<!-- APP -->
+<div id="pA">
   <div class="hdr">
-    <div class="hdr-top">
+    <div class="ht">
       <div style="display:flex;align-items:center;gap:8px">
         <span style="font-size:22px">🎓</span>
-        <span class="hdr-ficha">Ficha 3490221</span>
+        <span class="ficha">Ficha 3490221</span>
       </div>
-      <button class="hdr-salir" onclick="salir()">Salir</button>
+      <button class="salir" onclick="salir()">Salir</button>
     </div>
-    <div class="hdr-nombre" id="hN"></div>
-    <div class="hdr-doc"    id="hD"></div>
-    <div class="hdr-act"    id="hA"></div>
-  </div>
-
-  <div class="warn" id="wConn">
-    <b>⚠️ Sin conexión con Google Sheets</b>
-    Mostrando últimos datos guardados. Recarga para actualizar.
+    <div class="hn" id="hN"></div>
+    <div class="hd" id="hD"></div>
+    <div class="ha" id="hA"></div>
   </div>
 
   <div class="mets au">
     <div class="mg">
-      <div class="mg-pct" id="mP" style="color:var(--v)">—</div>
-      <div class="mg-inf">
-        <div class="mg-lbl">Asistencia trimestre</div>
+      <div class="mp" id="mP" style="color:var(--v)">—</div>
+      <div class="mi">
+        <div class="ml">Asistencia trimestre</div>
         <div class="badge bb" id="mE">—</div>
         <div class="barra"><div class="bf" id="mB" style="width:0"></div></div>
       </div>
     </div>
-    <div class="mm"><div class="mm-i">❌</div><div class="mm-n cf" id="mF">—</div><div class="mm-l">Faltas</div></div>
-    <div class="mm"><div class="mm-i">⏰</div><div class="mm-n ct" id="mT">—</div><div class="mm-l">Tardanzas</div></div>
-    <div class="mm"><div class="mm-i">📄</div><div class="mm-n ce" id="mX">—</div><div class="mm-l">Excusas</div></div>
-    <div class="mm"><div class="mm-i">✅</div><div class="mm-n ca" id="mA">—</div><div class="mm-l">Asistidas</div></div>
+    <div class="mm"><div class="mi2">❌</div><div class="mn cf" id="mF">—</div><div class="mlt">Faltas</div></div>
+    <div class="mm"><div class="mi2">⏰</div><div class="mn cta" id="mT">—</div><div class="mlt">Tardanzas</div></div>
+    <div class="mm"><div class="mi2">📄</div><div class="mn ce" id="mX">—</div><div class="mlt">Excusas</div></div>
+    <div class="mm"><div class="mi2">✅</div><div class="mn ca" id="mA">—</div><div class="mlt">Asistidas</div></div>
   </div>
 
   <div class="tabs">
-    <button class="tab on" id="tN" onclick="verTab('n')">Novedades</button>
-    <button class="tab"    id="tH" onclick="verTab('h')">Historial</button>
-    <button class="tab"    id="tI" onclick="verTab('i')">Programa</button>
+    <button class="tab on" id="tN" onclick="tab('n')">Novedades</button>
+    <button class="tab"    id="tH" onclick="tab('h')">Historial</button>
+    <button class="tab"    id="tI" onclick="tab('i')">Programa</button>
   </div>
   <div id="tC" class="sec"></div>
 </div>
 
 <script>
-// ── ENLACES GOOGLE SHEETS (4 hojas) ──────────────────────────
-const HOJAS = [
-  { mes:"Mayo",   url:"https://corsproxy.io/?url=https://docs.google.com/spreadsheets/d/e/2PACX-1vRAGyWHqyQo0JOOUwXpHLUTHCSGtMNFXcNsZuewZyU1NW_t1LIO0QrwVoglGHPpq32GJwVD-BxPDJM0/pub?gid=2048668690&single=true&output=csv" },
-  { mes:"Junio",  url:"https://corsproxy.io/?url=https://docs.google.com/spreadsheets/d/e/2PACX-1vRAGyWHqyQo0JOOUwXpHLUTHCSGtMNFXcNsZuewZyU1NW_t1LIO0QrwVoglGHPpq32GJwVD-BxPDJM0/pub?gid=1355605300&single=true&output=csv" },
-  { mes:"Julio",  url:"https://corsproxy.io/?url=https://docs.google.com/spreadsheets/d/e/2PACX-1vRAGyWHqyQo0JOOUwXpHLUTHCSGtMNFXcNsZuewZyU1NW_t1LIO0QrwVoglGHPpq32GJwVD-BxPDJM0/pub?gid=1362203307&single=true&output=csv" },
-  { mes:"Agosto", url:"https://corsproxy.io/?url=https://docs.google.com/spreadsheets/d/e/2PACX-1vRAGyWHqyQo0JOOUwXpHLUTHCSGtMNFXcNsZuewZyU1NW_t1LIO0QrwVoglGHPpq32GJwVD-BxPDJM0/pub?gid=1022157655&single=true&output=csv" },
-];
+// ── ENDPOINT APPS SCRIPT ──────────────────────────────────────
+const API = "https://script.google.com/macros/s/AKfycbyjNB_YWNyiUTea0uKgOhSdHviCvaCmnuCnftOYsh9QuvnHR4fF9KbdsoOJtEl2RNCc9Q/exec";
 
 // ── APRENDICES ────────────────────────────────────────────────
 const APS = [
@@ -208,185 +200,131 @@ const APS = [
   {id:"1097189191",n:"Yiseth Tamar Escaño Acevedo"},
 ];
 
-let AP = null, DATA = null;
-
-// ── PARSEAR CSV ───────────────────────────────────────────────
-function csv(txt) {
-  return txt.trim().split(/\r?\n/).map(l => {
-    const cols=[]; let d=false, v="";
-    for(const c of l){
-      if(c==='"'){d=!d;continue}
-      if(c===','&&!d){cols.push(v.trim());v="";continue}
-      v+=c;
-    }
-    cols.push(v.trim());
-    return cols;
-  });
-}
-
-// ── LEER HOJA Y EXTRAER DATOS DEL APRENDIZ ───────────────────
-async function leerHoja(hoja, doc) {
-  const r = await fetch(hoja.url);
-  if(!r.ok) throw new Error(r.status);
-  const filas = csv(await r.text());
-
-  // Buscar fila del aprendiz — col B (índice 1) tiene el documento
-  let filaAp = null;
-  let filaMes = -1, filaDia = -1;
-
-  for(let i=0;i<filas.length;i++){
-    const f = filas[i];
-    // Detectar fila con encabezados de mes (MAY/JUN/JUL/AGO o 5/6/7/8)
-    if(f.some(c=>["MAY","JUN","JUL","AGO"].includes((c||"").toUpperCase().trim()))){
-      filaMes=i; filaDia=i+1;
-    }
-    // Detectar fila del aprendiz
-    const docF = (f[1]||"").replace(/\D/g,"");
-    if(docF===doc) filaAp={idx:i,f};
-  }
-
-  if(!filaAp) return null;
-
-  const f  = filaAp.f;
-  const n  = f.length;
-
-  // Últimas 5 columnas: TOTAL F | TOTAL T | TOTAL E | % | ESTADO
-  const tF  = parseInt(f[n-5])||0;
-  const tT  = parseInt(f[n-4])||0;
-  const tE  = parseInt(f[n-3])||0;
-  let   pct = parseFloat((f[n-2]||"0").replace("%","").replace(",","."));
-  if(pct<=1&&pct>0) pct*=100;
-  const est = (f[n-1]||"").trim();
-
-  // Sesiones individuales: col E en adelante (índice 4) hasta n-5
-  const meses = filaMes>=0 ? filas[filaMes] : [];
-  const dias  = filaDia>=0 ? filas[filaDia] : [];
-  const MN = {"MAY":"Mayo","JUN":"Junio","JUL":"Julio","AGO":"Agosto",
-               "5":"Mayo","6":"Junio","7":"Julio","8":"Agosto"};
-  const sesiones=[];
-  for(let c=4;c<n-5;c++){
-    const val = (f[c]||"").trim().toUpperCase()||"✔";
-    const mes = (meses[c]||"").trim();
-    const dia = (dias[c]||"").trim();
-    if(!dia&&!mes) continue;
-    const mn  = MN[mes.toUpperCase()]||hoja.mes;
-    sesiones.push({label: dia?`${mn} ${dia}`:mn, mes:mn, val});
-  }
-
-  return {tF,tT,tE,pct,est,sesiones,asiste:sesiones.filter(s=>s.val==="✔").length};
-}
-
-// ── CARGAR TODOS LOS MESES ────────────────────────────────────
-async function cargar(doc) {
-  let faltas=0,tardes=0,excusas=0,asiste=0,sesiones=[],ok=false;
-  for(const h of HOJAS){
-    try{
-      const d=await leerHoja(h,doc);
-      if(d){
-        ok=true;
-        faltas+=d.tF; tardes+=d.tT; excusas+=d.tE; asiste+=d.asiste;
-        sesiones.push(...d.sesiones);
-      }
-    }catch(e){console.warn(h.mes,e)}
-  }
-  const tot = sesiones.length||54;
-  const pct = ((asiste+tardes*0.5)/tot)*100;
-  const estado = faltas>=3||pct<90 ? "🔴 EN RIESGO"
-               : pct>=95           ? "✅ BUENO"
-               :                     "🟡 REGULAR";
-  return {faltas,tardes,excusas,asiste,pct,estado,sesiones,ok};
-}
+let AP=null, DATA=null;
 
 // ── LOGIN ─────────────────────────────────────────────────────
-document.getElementById("inp").addEventListener("keyup",e=>{if(e.key==="Enter")ingresar()});
+document.getElementById("inp").addEventListener("keyup",e=>{if(e.key==="Enter")login()});
 
-async function ingresar(){
-  const doc=document.getElementById("inp").value.replace(/\D/g,"");
-  const ap=APS.find(a=>a.id===doc);
-  if(!ap){document.getElementById("err").classList.add("on");return}
+async function login(){
+  const doc = document.getElementById("inp").value.replace(/\D/g,"");
+  const ap  = APS.find(a=>a.id===doc);
+  if(!ap){ document.getElementById("err").classList.add("on"); return; }
   document.getElementById("err").classList.remove("on");
-  AP=ap;
-  show("pCarga");
-  let data;
-  try{
-    data=await cargar(doc);
-    localStorage.setItem("c_"+doc,JSON.stringify({data,ts:Date.now()}));
-  }catch(e){
-    const c=localStorage.getItem("c_"+doc);
-    data=c?JSON.parse(c).data:{faltas:0,tardes:0,excusas:0,asiste:0,pct:100,estado:"✅ BUENO",sesiones:[],ok:false};
-    data._cache=true;
-  }
-  DATA=data;
-  localStorage.setItem("ud",doc);
-  show("pApp");
-  renderApp();
+  AP = ap;
+  pantalla("pC");
+  DATA = await fetchDatos(doc);
+  localStorage.setItem("ud", doc);
+  pantalla("pA");
+  render();
 }
 
 function salir(){
-  AP=null;DATA=null;
-  show("pLogin");
+  AP=null; DATA=null;
+  pantalla("pL");
   document.getElementById("inp").value="";
 }
 
-function show(id){
-  ["pLogin","pCarga","pApp"].forEach(p=>{
+function pantalla(id){
+  ["pL","pC","pA"].forEach(p=>{
     const el=document.getElementById(p);
-    if(p==="pCarga") el.style.display=p===id?"flex":"none";
-    else el.style.display=p===id?"block":"none";
+    el.style.display = p===id ? (p==="pC"?"flex":"block") : "none";
   });
 }
 
+// ── FETCH DATOS DESDE APPS SCRIPT ────────────────────────────
+async function fetchDatos(doc){
+  try{
+    const url = API + "?doc=" + doc;
+    const resp = await fetch(url);
+    if(!resp.ok) throw new Error(resp.status);
+    const data = await resp.json();
+    data.ok = true;
+    localStorage.setItem("cache_"+doc, JSON.stringify({data, ts:Date.now()}));
+    return data;
+  } catch(e){
+    console.warn("Error API:", e);
+    // Intentar caché local
+    const c = localStorage.getItem("cache_"+doc);
+    if(c){
+      const d = JSON.parse(c).data;
+      d._cache = true; d.ok = false;
+      return d;
+    }
+    return {faltas:0,tardes:0,excusas:0,asiste:0,pct:100,
+            estado:"✅ BUENO",sesiones:[],ok:false,_cache:false,_error:true};
+  }
+}
+
 // ── RENDER ────────────────────────────────────────────────────
-function renderApp(){
-  const d=DATA;
-  document.getElementById("hN").textContent=AP.n.split(" ").slice(0,2).join(" ");
-  document.getElementById("hD").textContent="C.C. "+AP.id;
-  document.getElementById("hA").textContent="Actualizado: "+
+function render(){
+  const d = DATA;
+  document.getElementById("hN").textContent = AP.n.split(" ").slice(0,2).join(" ");
+  document.getElementById("hD").textContent = "C.C. " + AP.id;
+  document.getElementById("hA").textContent = "Actualizado: " +
     new Date().toLocaleString("es-CO",{day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit"});
 
-  document.getElementById("wConn").classList.toggle("on",!d.ok||!!d._cache);
+  const pct   = Math.min(d.pct||0, 100);
+  const color = d.estado&&d.estado.includes("BUENO")  ? "var(--v)"
+              : d.estado&&d.estado.includes("REGULAR") ? "var(--a)"
+              : "var(--r)";
 
-  const pct=Math.min(d.pct,100);
-  const color=d.estado.includes("BUENO")?"var(--v)":d.estado.includes("REGULAR")?"var(--a)":"var(--r)";
-  document.getElementById("mP").textContent=pct.toFixed(1)+"%";
-  document.getElementById("mP").style.color=color;
-  document.getElementById("mB").style.width=pct+"%";
-  document.getElementById("mB").style.background=color;
-  const badge=document.getElementById("mE");
-  badge.textContent=d.estado;
-  badge.className="badge "+(d.estado.includes("BUENO")?"bb":d.estado.includes("REGULAR")?"br":"be");
-  document.getElementById("mF").textContent=d.faltas;
-  document.getElementById("mT").textContent=d.tardes;
-  document.getElementById("mX").textContent=d.excusas;
-  document.getElementById("mA").textContent=d.asiste;
-  verTab("n");
+  document.getElementById("mP").textContent   = pct.toFixed(1)+"%";
+  document.getElementById("mP").style.color   = color;
+  document.getElementById("mB").style.width   = pct+"%";
+  document.getElementById("mB").style.background = color;
+
+  const badge = document.getElementById("mE");
+  badge.textContent = d.estado||"—";
+  badge.className   = "badge "+
+    (d.estado&&d.estado.includes("BUENO")?"bb":d.estado&&d.estado.includes("REGULAR")?"ba":"be");
+
+  document.getElementById("mF").textContent = d.faltas||0;
+  document.getElementById("mT").textContent = d.tardes||0;
+  document.getElementById("mX").textContent = d.excusas||0;
+  document.getElementById("mA").textContent = d.asiste||0;
+
+  // Mostrar aviso si hay error o caché
+  if(!d.ok || d._error){
+    let aviso = document.getElementById("avisoErr");
+    if(!aviso){
+      aviso = document.createElement("div");
+      aviso.id = "avisoErr";
+      aviso.style.cssText = "margin:0 16px 12px;padding:14px 16px;border-radius:12px;background:#fff3e0;border:1px solid #ffcc80;font-size:13px;color:#e65100";
+      aviso.innerHTML = d._error
+        ? "<b>⚠️ No se pudo conectar con Google Sheets</b><br>Verifica tu conexión a internet y recarga la página."
+        : "<b>⚠️ Mostrando datos guardados</b><br>Recarga para ver los datos más recientes.";
+      document.getElementById("pA").insertBefore(aviso, document.querySelector(".mets"));
+    }
+  }
+  tab("n");
 }
 
 // ── TABS ──────────────────────────────────────────────────────
-function verTab(t){
-  document.getElementById("tN").classList.toggle("on",t==="n");
-  document.getElementById("tH").classList.toggle("on",t==="h");
-  document.getElementById("tI").classList.toggle("on",t==="i");
-  const c=document.getElementById("tC"); c.innerHTML="";
+function tab(t){
+  ["n","h","i"].forEach(x=>{
+    document.getElementById("t"+x.toUpperCase()).classList.toggle("on",x===t);
+  });
+  const c = document.getElementById("tC");
+  c.innerHTML = "";
   if(t==="n") tabNov(c);
   else if(t==="h") tabHist(c);
   else tabInfo(c);
 }
 
-function ico(val){
-  if(val==="F") return{i:"❌",ic:"if",tag:"Falta",   tc:"tf"};
-  if(val==="T") return{i:"⏰",ic:"it",tag:"Tarde",   tc:"tt"};
-  if(val==="E") return{i:"📄",ic:"ie",tag:"Excusa",  tc:"te"};
-  return          {i:"✔", ic:"iok",tag:"Asistió",tc:"tok"};
+function ico(v){
+  if(v==="F") return{i:"❌",ic:"iff",tag:"Falta",  tc:"tff"};
+  if(v==="T") return{i:"⏰",ic:"itr",tag:"Tarde",  tc:"ttr"};
+  if(v==="E") return{i:"📄",ic:"iex",tag:"Excusa", tc:"tex"};
+  return        {i:"✔", ic:"iok",tag:"Asistió",tc:"tok"};
 }
 
 function mkItem(s,delay){
-  const {i,ic,tag,tc}=ico(s.val);
+  const {i,ic,tag,tc}=ico(s.val||"✔");
   const el=document.createElement("div");
   el.className="item au"; el.style.animationDelay=delay+"s";
   el.innerHTML=`<div class="ii ${ic}">${i}</div>
-    <div class="i-inf"><div class="i-f">${s.label}</div><div class="i-m">${s.mes} 2026</div></div>
-    <span class="itag ${tc}">${tag}</span>`;
+    <div class="inf"><div class="ifec">${s.label}</div><div class="imes">${s.mes} 2026</div></div>
+    <span class="tag ${tc}">${tag}</span>`;
   return el;
 }
 
@@ -396,7 +334,8 @@ function tabNov(c){
     c.innerHTML=`<div class="vacio"><div class="vi">🎉</div>¡Sin novedades! Asistencia perfecta.</div>`;
     return;
   }
-  const h=document.createElement("div"); h.className="sec-t";
+  const h=document.createElement("div");
+  h.className="st";
   h.textContent=`${novs.length} novedad${novs.length>1?"es":""} registrada${novs.length>1?"s":""}`;
   c.appendChild(h);
   novs.forEach((s,i)=>c.appendChild(mkItem(s,i*.06)));
@@ -404,11 +343,14 @@ function tabNov(c){
 
 function tabHist(c){
   const ss=DATA.sesiones||[];
-  if(!ss.length){c.innerHTML=`<div class="vacio"><div class="vi">📭</div>Sin sesiones cargadas aún.</div>`;return}
+  if(!ss.length){
+    c.innerHTML=`<div class="vacio"><div class="vi">📭</div>Sin sesiones cargadas aún.</div>`;
+    return;
+  }
   const meses=[...new Set(ss.map(s=>s.mes))];
   meses.forEach(mes=>{
-    const h=document.createElement("div"); h.className="sec-t";
-    h.textContent=mes+" 2026"; c.appendChild(h);
+    const h=document.createElement("div");
+    h.className="st"; h.textContent=mes+" 2026"; c.appendChild(h);
     ss.filter(s=>s.mes===mes).reverse().forEach((s,i)=>c.appendChild(mkItem(s,i*.04)));
   });
 }
@@ -417,47 +359,42 @@ function tabInfo(c){
   const d=DATA;
   c.innerHTML=`
   <div class="ic"><h3>📚 Programa</h3>
-    <div class="if2"><span>Programa</span><span style="text-align:right;max-width:58%;font-size:12px">Tecnología Instrumentación y Control</span></div>
-    <div class="if2"><span>Ficha</span><span>3490221</span></div>
-    <div class="if2"><span>Centro</span><span>CIDT Santander</span></div>
-    <div class="if2"><span>Instructor</span><span>Emerso Villa</span></div>
-    <div class="if2"><span>Jornada</span><span>Mañana</span></div>
-    <div class="if2"><span>Período</span><span>28 May – 20 Ago 2026</span></div>
-    <div class="if2"><span>Total sesiones</span><span>54</span></div>
+    <div class="ifl"><span>Programa</span><span style="text-align:right;max-width:58%;font-size:12px">Tecnología Instrumentación y Control</span></div>
+    <div class="ifl"><span>Ficha</span><span>3490221</span></div>
+    <div class="ifl"><span>Centro</span><span>CIDT Santander</span></div>
+    <div class="ifl"><span>Instructor</span><span>Emerso Villa</span></div>
+    <div class="ifl"><span>Jornada</span><span>Mañana</span></div>
+    <div class="ifl"><span>Período</span><span>28 May – 20 Ago 2026</span></div>
+    <div class="ifl"><span>Total sesiones</span><span>54</span></div>
   </div>
   <div class="ic"><h3>📊 Mi resumen</h3>
-    <div class="if2"><span>Sesiones cargadas</span><span>${d.sesiones.length}</span></div>
-    <div class="if2"><span>Asistencias ✔</span><span class="ca">${d.asiste}</span></div>
-    <div class="if2"><span>Faltas F</span><span class="cf">${d.faltas}</span></div>
-    <div class="if2"><span>Tardanzas T</span><span class="ct">${d.tardes}</span></div>
-    <div class="if2"><span>Excusas E</span><span class="ce">${d.excusas}</span></div>
-    <div class="if2"><span>% Asistencia</span><span>${d.pct.toFixed(1)}%</span></div>
+    <div class="ifl"><span>Sesiones registradas</span><span>${(d.sesiones||[]).length}</span></div>
+    <div class="ifl"><span>Asistencias ✔</span><span class="ca">${d.asiste||0}</span></div>
+    <div class="ifl"><span>Faltas F</span><span class="cf">${d.faltas||0}</span></div>
+    <div class="ifl"><span>Tardanzas T</span><span class="cta">${d.tardes||0}</span></div>
+    <div class="ifl"><span>Excusas E</span><span class="ce">${d.excusas||0}</span></div>
+    <div class="ifl"><span>% Asistencia</span><span>${(d.pct||0).toFixed(1)}%</span></div>
   </div>
   <div class="ic"><h3>📏 Estados</h3>
-    <div class="if2"><span>✅ Bueno</span><span>≥ 95%</span></div>
-    <div class="if2"><span>🟡 Regular</span><span>90% – 94%</span></div>
-    <div class="if2"><span>🔴 En riesgo</span><span>&lt;90% o 3+ faltas</span></div>
-    <div class="if2"><span>Tardanza</span><span>Descuenta 50%</span></div>
-    <div class="if2"><span>Falta / Excusa</span><span>Descuenta 100%</span></div>
+    <div class="ifl"><span>✅ Bueno</span><span>≥ 95%</span></div>
+    <div class="ifl"><span>🟡 Regular</span><span>90% – 94%</span></div>
+    <div class="ifl"><span>🔴 En riesgo</span><span>&lt;90% o 3+ faltas</span></div>
+    <div class="ifl"><span>Tardanza</span><span>Descuenta 50%</span></div>
+    <div class="ifl"><span>Falta / Excusa</span><span>Descuenta 100%</span></div>
   </div>`;
 }
 
 // ── AUTO-LOGIN ────────────────────────────────────────────────
-window.addEventListener("load",async()=>{
-  const ud=localStorage.getItem("ud");
+window.addEventListener("load", async()=>{
+  const ud = localStorage.getItem("ud");
   if(!ud) return;
-  const ap=APS.find(a=>a.id===ud);
+  const ap = APS.find(a=>a.id===ud);
   if(!ap) return;
-  AP=ap; show("pCarga");
-  try{
-    DATA=await cargar(ud);
-    localStorage.setItem("c_"+ud,JSON.stringify({data:DATA,ts:Date.now()}));
-  }catch(e){
-    const c=localStorage.getItem("c_"+ud);
-    DATA=c?JSON.parse(c).data:{faltas:0,tardes:0,excusas:0,asiste:0,pct:100,estado:"✅ BUENO",sesiones:[],ok:false};
-    DATA._cache=true;
-  }
-  show("pApp"); renderApp();
+  AP = ap;
+  pantalla("pC");
+  DATA = await fetchDatos(ud);
+  pantalla("pA");
+  render();
 });
 </script>
 </body>
