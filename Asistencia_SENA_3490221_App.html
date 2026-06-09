@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"/>
+<meta name="theme-color" content="#006633"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="apple-mobile-web-app-title" content="Asistencia SENA"/>
+<title>Asistencia · Ficha 3490221</title>
+<style>
+:root {
+  --verde:      #006633;
+  --verde-med:  #008040;
+  --verde-cl:   #e8f5e9;
+  --verde-ico:  #43a047;
+  --rojo:       #c62828;
+  --rojo-cl:    #ffebee;
+  --amarillo:   #f57f17;
+  --amar-cl:    #fff8e1;
+  --azul:       #1565c0;
+  --azul-cl:    #e3f2fd;
+  --gris-bg:    #f4f6f4;
+  --gris-card:  #ffffff;
+  --gris-borde: #e0e0e0;
+  --gris-txt:   #757575;
+  --negro:      #1a1a1a;
+  --radio:      16px;
+  --sombra:     0 2px 12px rgba(0,0,0,.09);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;font-family:'Segoe UI',system-ui,sans-serif;background:var(--gris-bg);color:var(--negro)}
+button{cursor:pointer;border:none;background:none;font:inherit}
+input{font:inherit}
+
+/* ── LOGIN ── */
+#pLogin{
+  min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;padding:24px;
+  background:linear-gradient(160deg,#003d1f 0%,#006633 55%,#008040 100%);
+}
+.lg-logo{
+  width:86px;height:86px;border-radius:22px;
+  background:rgba(255,255,255,.13);border:2px solid rgba(255,255,255,.22);
+  display:flex;align-items:center;justify-content:center;
+  font-size:42px;margin-bottom:22px;backdrop-filter:blur(6px);
+}
+.lg-title{color:#fff;font-size:23px;font-weight:800;text-align:center;margin-bottom:4px;letter-spacing:-.3px}
+.lg-sub{color:rgba(255,255,255,.65);font-size:13px;text-align:center;margin-bottom:34px}
+.lg-card{background:#fff;border-radius:var(--radio);padding:28px 24px;width:100%;max-width:380px;box-shadow:0 8px 32px rgba(0,0,0,.22)}
+.lg-label{font-size:11px;font-weight:700;color:var(--gris-txt);text-transform:uppercase;letter-spacing:.9px;display:block;margin-bottom:8px}
+.lg-input{
+  width:100%;padding:14px 16px;border:2px solid var(--gris-borde);
+  border-radius:10px;font-size:19px;letter-spacing:2px;color:var(--negro);
+  outline:none;transition:border .2s;-webkit-appearance:none;
+}
+.lg-input:focus{border-color:var(--verde)}
+.lg-input::placeholder{letter-spacing:0;font-size:14px;color:#bbb}
+.lg-btn{
+  margin-top:18px;width:100%;padding:15px;border-radius:10px;
+  background:var(--verde);color:#fff;font-size:15px;font-weight:700;
+  transition:background .15s,transform .1s;-webkit-tap-highlight-color:transparent;
+}
+.lg-btn:active{background:#004d26;transform:scale(.98)}
+.lg-err{margin-top:12px;padding:10px 14px;background:var(--rojo-cl);border-radius:8px;color:var(--rojo);font-size:13px;font-weight:500;display:none}
+.lg-err.on{display:block}
+.lg-hint{margin-top:14px;text-align:center;font-size:12px;color:var(--gris-txt)}
+
+/* ── CARGANDO ── */
+#pCarga{
+  display:none;min-height:100vh;
+  background:linear-gradient(160deg,#003d1f,#006633);
+  align-items:center;justify-content:center;flex-direction:column;gap:20px;
+}
+.spin{
+  width:52px;height:52px;border:4px solid rgba(255,255,255,.25);
+  border-top-color:#fff;border-radius:50%;
+  animation:girar .8s linear infinite;
+}
+@keyframes girar{to{transform:rotate(360deg)}}
+.carga-txt{color:rgba(255,255,255,.8);font-size:14px;font-weight:600}
+.carga-sub{color:rgba(255,255,255,.5);font-size:12px;margin-top:-12px}
+
+/* ── APP ── */
+#pApp{display:none;min-height:100vh;padding-bottom:24px}
+
+.app-hdr{
+  background:linear-gradient(135deg,#003d1f,#006633);
+  padding:20px 20px 32px;position:relative;overflow:hidden;
+}
+.app-hdr::after{
+  content:'';position:absolute;bottom:-20px;left:0;right:0;
+  height:40px;background:var(--gris-bg);
+  border-radius:50% 50% 0 0/30px 30px 0 0;
+}
+.hdr-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.hdr-ficha{
+  background:rgba(255,255,255,.18);backdrop-filter:blur(4px);
+  border-radius:20px;padding:4px 12px;
+  font-size:11px;font-weight:700;color:rgba(255,255,255,.9);letter-spacing:.5px;
+}
+.hdr-salir{
+  background:rgba(255,255,255,.15);border-radius:8px;
+  padding:6px 13px;font-size:12px;color:rgba(255,255,255,.85);font-weight:600;
+}
+.hdr-nombre{color:#fff;font-size:21px;font-weight:800;line-height:1.2;margin-bottom:3px}
+.hdr-doc{color:rgba(255,255,255,.6);font-size:12px;font-weight:500}
+.hdr-act{color:rgba(255,255,255,.45);font-size:11px;margin-top:4px}
+
+/* Métricas */
+.metricas{padding:0 16px 14px;display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.met-grande{
+  grid-column:1/-1;background:var(--gris-card);border-radius:var(--radio);
+  padding:20px;box-shadow:var(--sombra);display:flex;align-items:center;gap:16px;
+}
+.met-pct{font-size:50px;font-weight:800;line-height:1;letter-spacing:-2px}
+.met-info{flex:1}
+.met-lbl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--gris-txt);margin-bottom:6px}
+.estado-badge{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:20px;font-size:13px;font-weight:700}
+.eb-bueno  {background:var(--verde-cl);color:var(--verde)}
+.eb-regular{background:var(--amar-cl);color:var(--amarillo)}
+.eb-riesgo {background:var(--rojo-cl);color:var(--rojo)}
+.barra-bg{margin-top:10px;height:6px;background:#e8e8e8;border-radius:3px;overflow:hidden}
+.barra-fill{height:100%;border-radius:3px;transition:width .9s cubic-bezier(.4,0,.2,1)}
+
+.met-mini{background:var(--gris-card);border-radius:var(--radio);padding:16px;box-shadow:var(--sombra)}
+.met-ico{font-size:24px;margin-bottom:5px}
+.met-num{font-size:30px;font-weight:800;line-height:1;letter-spacing:-1px;margin-bottom:2px}
+.met-tag{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--gris-txt)}
+.cf{color:var(--rojo)}.ct{color:var(--amarillo)}.ce{color:var(--azul)}.ca{color:var(--verde-ico)}
+
+/* Tabs */
+.tabs{padding:0 16px 10px;display:flex;gap:8px}
+.tab{
+  flex:1;padding:10px 4px;border-radius:10px;font-size:12px;font-weight:700;
+  color:var(--gris-txt);background:var(--gris-card);
+  transition:all .18s;-webkit-tap-highlight-color:transparent;box-shadow:var(--sombra);
+}
+.tab.on{background:var(--verde);color:#fff}
+
+/* Contenido */
+.seccion{padding:0 16px 12px}
+.sec-titulo{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--gris-txt);margin-bottom:10px;padding-left:2px}
+.item{
+  background:var(--gris-card);border-radius:12px;padding:12px 15px;
+  margin-bottom:8px;display:flex;align-items:center;gap:12px;
+  box-shadow:0 1px 5px rgba(0,0,0,.07);
+}
+.item-ico{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.i-ok    {background:var(--verde-cl)}
+.i-falta {background:var(--rojo-cl)}
+.i-tarde {background:var(--amar-cl)}
+.i-excusa{background:var(--azul-cl)}
+.item-info{flex:1;min-width:0}
+.item-fecha{font-size:14px;font-weight:600;color:var(--negro)}
+.item-mes{font-size:11px;color:var(--gris-txt);margin-top:1px}
+.item-tag{font-size:11px;font-weight:700;padding:3px 9px;border-radius:12px;flex-shrink:0}
+.tg-ok    {background:var(--verde-cl);color:var(--verde)}
+.tg-falta {background:var(--rojo-cl);color:var(--rojo)}
+.tg-tarde {background:var(--amar-cl);color:var(--amarillo)}
+.tg-excusa{background:var(--azul-cl);color:var(--azul)}
+
+.info-card{background:var(--gris-card);border-radius:var(--radio);padding:18px;box-shadow:var(--sombra);margin-bottom:12px}
+.info-card h3{font-size:13px;font-weight:700;color:var(--verde);margin-bottom:12px}
+.info-fila{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--gris-borde);font-size:13px}
+.info-fila:last-child{border-bottom:none}
+.info-fila span:first-child{color:var(--gris-txt)}
+.info-fila span:last-child{font-weight:600}
+
+.vacio{text-align:center;padding:44px 20px;color:var(--gris-txt);font-size:14px}
+.vacio-ico{font-size:44px;margin-bottom:10px}
+
+/* Error conexión */
+.err-conn{
+  margin:16px;padding:16px;border-radius:12px;
+  background:#fff3e0;border:1px solid #ffcc80;
+  font-size:13px;color:#e65100;display:none;
+}
+.err-conn.on{display:block}
+.err-conn b{display:block;margin-bottom:4px;font-size:14px}
+
+@keyframes slideUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.au{animation:slideUp .32s ease both}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="pLogin">
+  <div class="lg-logo">📋</div>
+  <h1 class="lg-title">Control de Asistencia</h1>
+  <p class="lg-sub">SENA · CIDT · Ficha 3490221</p>
+  <div class="lg-card">
+    <label class="lg-label" for="inp">Número de documento</label>
+    <input id="inp" class="lg-input" type="tel" inputmode="numeric"
+           pattern="[0-9]*" placeholder="Ej: 1097189805" autocomplete="off"/>
+    <div class="lg-err" id="err">⚠️ Documento no encontrado. Verifica el número.</div>
+    <button class="lg-btn" onclick="ingresar()">Ver mi asistencia</button>
+    <p class="lg-hint">Ingresa tu cédula o documento de identidad</p>
+  </div>
+</div>
+
+<!-- CARGANDO -->
+<div id="pCarga" style="display:none;flex-direction:column">
+  <div class="spin"></div>
+  <div class="carga-txt">Consultando asistencia...</div>
+  <div class="carga-sub">Conectando con Google Sheets</div>
+</div>
+
+<!-- APP -->
+<div id="pApp">
+  <div class="app-hdr">
+    <div class="hdr-top">
+      <div style="display:flex;align-items:center;gap:8px">
+        <span style="font-size:22px">🎓</span>
+        <span class="hdr-ficha">Ficha 3490221</span>
+      </div>
+      <button class="hdr-salir" onclick="salir()">Salir</button>
+    </div>
+    <div class="hdr-nombre" id="hNombre"></div>
+    <div class="hdr-doc"    id="hDoc"></div>
+    <div class="hdr-act"    id="hAct"></div>
+  </div>
+
+  <div class="err-conn" id="errConn">
+    <b>⚠️ Sin conexión con Google Sheets</b>
+    Mostrando últimos datos guardados. Conéctate a internet y recarga para ver datos actualizados.
+  </div>
+
+  <div class="metricas au">
+    <div class="met-grande">
+      <div class="met-pct" id="mPct" style="color:var(--verde)">—</div>
+      <div class="met-info">
+        <div class="met-lbl">Asistencia trimestre</div>
+        <div class="estado-badge" id="mEstado">—</div>
+        <div class="barra-bg"><div class="barra-fill" id="mBarra" style="width:0"></div></div>
+      </div>
+    </div>
+    <div class="met-mini"><div class="met-ico">❌</div><div class="met-num cf" id="mF">—</div><div class="met-tag">Faltas</div></div>
+    <div class="met-mini"><div class="met-ico">⏰</div><div class="met-num ct" id="mT">—</div><div class="met-tag">Tardanzas</div></div>
+    <div class="met-mini"><div class="met-ico">📄</div><div class="met-num ce" id="mE">—</div><div class="met-tag">Excusas</div></div>
+    <div class="met-mini"><div class="met-ico">✅</div><div class="met-num ca" id="mA">—</div><div class="met-tag">Asistidas</div></div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab on" id="tabN" onclick="tab('novedades')">Novedades</button>
+    <button class="tab"    id="tabH" onclick="tab('historial')">Historial</button>
+    <button class="tab"    id="tabI" onclick="tab('info')">Programa</button>
+  </div>
+
+  <div id="tabCont" class="seccion"></div>
+</div>
+
+<script>
+// ── CONFIGURACIÓN ─────────────────────────────────────────────
+const URL_BASE = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRAGyWHqyQo0JOOUwXpHLUTHCSGtMNFXcNsZuewZyU1NW_t1LIO0QrwVoglGHPpq32GJwVD-BxPDJM0/pub?output=csv";
+
+// URLs por hoja (sheet= con el nombre exacto de cada pestaña)
+const HOJAS = [
+  { nombre:"📅 MAYO 2026",   url: URL_BASE + "&sheet=%F0%9F%93%85%20MAYO%202026"   },
+  { nombre:"📅 JUNIO 2026",  url: URL_BASE + "&sheet=%F0%9F%93%85%20JUNIO%202026"  },
+  { nombre:"📅 JULIO 2026",  url: URL_BASE + "&sheet=%F0%9F%93%85%20JULIO%202026"  },
+  { nombre:"📅 AGOSTO 2026", url: URL_BASE + "&sheet=%F0%9F%93%85%20AGOSTO%202026" },
+];
+
+// ── LISTA APRENDICES (para validar login) ─────────────────────
+const APRENDICES = [
+  {id:"1097189805",nombre:"Angel Albeiro Mena Prada"},
+  {id:"1096802008",nombre:"Christopher Santiago Aparicio Albis"},
+  {id:"1097186962",nombre:"Danny Yulithza Vesga Porras"},
+  {id:"1096182932",nombre:"Darwin Segura Abaunza"},
+  {id:"1097190697",nombre:"Darwin Daniel Melo Berdugo"},
+  {id:"1096184815",nombre:"Duban Ferney Cuadros Suarez"},
+  {id:"1097190919",nombre:"Gian Carlos Lamus Chavez"},
+  {id:"1005240913",nombre:"Jasson Stiven Calderon Tamayo"},
+  {id:"1096202940",nombre:"Jean Carlos Guerrero Arrieta"},
+  {id:"1097186846",nombre:"Jeimi Alejandra Gualdrón Ruiz"},
+  {id:"1065994409",nombre:"Jersey Andrey Ardila Castro"},
+  {id:"1097187557",nombre:"Jhoan Stevan Palomino Perez"},
+  {id:"1097191025",nombre:"Johan Jared Perez Torres"},
+  {id:"1097182811",nombre:"Jorge Daniel Sandoval Ortega"},
+  {id:"1097184242",nombre:"Juan Jairo Tejada Julio"},
+  {id:"1097191078",nombre:"Juan Pablo Saavedra Frias"},
+  {id:"1022957849",nombre:"Laura Marcela Lopez Quintero"},
+  {id:"1096209258",nombre:"Laura Milena Monsalve Castillo"},
+  {id:"1096248170",nombre:"Liliana Perez Guecha"},
+  {id:"1005220470",nombre:"Luis Emilio Villa Zambrano"},
+  {id:"1046401858",nombre:"Maria Fernanda Angel Lopez"},
+  {id:"1096802098",nombre:"Marlyn Zharick Baldovino Castrillon"},
+  {id:"1096255377",nombre:"Michael Alexander Vesga Garcia"},
+  {id:"1099741591",nombre:"Miguel Angel Rangel Delgado"},
+  {id:"1096207599",nombre:"Nicolle Dayan Mendoza Gonzalez"},
+  {id:"1096804273",nombre:"Oscar Fabian Benavides Chaves"},
+  {id:"1005177882",nombre:"Rafael Andres Rangel Diaz"},
+  {id:"1097190212",nombre:"Santiago Andres Alvarado Ortiz"},
+  {id:"1096208075",nombre:"Sergio Andres Sepulveda Castillo"},
+  {id:"1096254626",nombre:"Slendy Jassibe Miranda Molina"},
+  {id:"1097189191",nombre:"Yiseth Tamar Escaño Acevedo"},
+];
+
+// ── ESTADO GLOBAL ─────────────────────────────────────────────
+let aprendiz = null;
+let datosCache = null;   // datos cargados del Sheets
+
+// ── PARSEAR CSV ───────────────────────────────────────────────
+function parsearCSV(texto) {
+  return texto.trim().split("\n").map(linea => {
+    const cols = [];
+    let dentro = false, val = "";
+    for (let c of linea) {
+      if (c === '"') { dentro = !dentro; continue; }
+      if (c === ',' && !dentro) { cols.push(val.trim()); val = ""; continue; }
+      val += c;
+    }
+    cols.push(val.trim());
+    return cols;
+  });
+}
+
+// ── LEER UNA HOJA DEL SHEETS ─────────────────────────────────
+async function leerHoja(url) {
+  const resp = await fetch(url);
+  if (!resp.ok) throw new Error("Error " + resp.status);
+  const texto = await resp.text();
+  return parsearCSV(texto);
+}
+
+// ── BUSCAR FILA DEL APRENDIZ EN UNA HOJA ─────────────────────
+// La estructura es: col B = documento, col C = nombre
+// Filas de aprendices empiezan en fila 6 (índice 5 en CSV)
+// Últimas columnas: TOTAL FALTAS, TOTAL TARDES, TOTAL EXCUSAS, % ASIST, ESTADO
+function extraerDatosAprendiz(filas, docBuscado) {
+  const sesiones = [];
+
+  // Encontrar fila de encabezado de fechas (fila 4 del sheet = índice ~3)
+  // Buscar la fila del aprendiz por documento en col B (índice 1)
+  let filaAp = null;
+  let idxEncabMes = -1;
+  let idxEncabDia = -1;
+
+  for (let i = 0; i < filas.length; i++) {
+    const f = filas[i];
+    // Detectar fila de encabezado con meses (busca MAY/JUN/JUL/AGO)
+    if (f.some(c => ["MAY","JUN","JUL","AGO"].includes(c))) {
+      idxEncabMes = i;
+      idxEncabDia = i + 1;
+    }
+    // Buscar fila del aprendiz (col B = índice 1)
+    const doc = (f[1] || "").replace(/\D/g,"");
+    if (doc === docBuscado) {
+      filaAp = { idx: i, datos: f };
+    }
+  }
+
+  if (!filaAp) return null;
+
+  const f = filaAp.datos;
+  const n = f.length;
+
+  // Las últimas 5 columnas son: TOTAL F, TOTAL T, TOTAL E, % ASIST, ESTADO
+  const totalF  = parseInt(f[n-5]) || 0;
+  const totalT  = parseInt(f[n-4]) || 0;
+  const totalE  = parseInt(f[n-3]) || 0;
+  const pctRaw  = f[n-2] || "0";
+  const estado  = (f[n-1] || "").trim();
+
+  // Parsear porcentaje (puede venir como "94.4%" o "0.944")
+  let pct = parseFloat(pctRaw.replace("%",""));
+  if (pct <= 1) pct = pct * 100;
+
+  // Extraer sesiones individuales (cols E en adelante = índice 4)
+  // hasta la columna de TOTAL FALTAS (n-5)
+  const meses = idxEncabMes >= 0 ? filas[idxEncabMes] : [];
+  const dias  = idxEncabDia >= 0 ? filas[idxEncabDia] : [];
+  const MESES_NOMBRES = {
+    "MAY":"Mayo","JUN":"Junio","JUL":"Julio","AGO":"Agosto",
+    "5":"Mayo","6":"Junio","7":"Julio","8":"Agosto"
+  };
+
+  for (let col = 4; col < n - 5; col++) {
+    const val   = (f[col] || "").trim().toUpperCase();
+    const mes   = (meses[col] || "").trim();
+    const dia   = (dias[col]  || "").trim();
+    if (!dia && !mes) continue;
+    const mesN  = MESES_NOMBRES[mes] || mes;
+    const label = dia ? `${mesN} ${dia}` : mesN;
+    sesiones.push({ label, mes: mesN, val: val || "✔" });
+  }
+
+  const asiste = sesiones.filter(s => s.val === "✔").length;
+
+  return { totalF, totalT, totalE, pct, estado, sesiones, asiste };
+}
+
+// ── CARGAR TODOS LOS DATOS DEL APRENDIZ ──────────────────────
+async function cargarDatos(doc) {
+  const resultado = {
+    faltas:0, tardes:0, excusas:0, asiste:0,
+    pct:100, estado:"✅ BUENO", sesiones:[],
+    ok: true
+  };
+
+  let alguno = false;
+
+  for (const hoja of HOJAS) {
+    try {
+      const filas = await leerHoja(hoja.url);
+      const d = extraerDatosAprendiz(filas, doc);
+      if (d) {
+        alguno = true;
+        resultado.faltas  += d.totalF;
+        resultado.tardes  += d.totalT;
+        resultado.excusas += d.totalE;
+        resultado.asiste  += d.asiste;
+        resultado.sesiones.push(...d.sesiones);
+        // El % y estado final lo calculamos al final
+      }
+    } catch(e) {
+      console.warn("Error leyendo hoja:", hoja.nombre, e);
+    }
+  }
+
+  if (!alguno) { resultado.ok = false; return resultado; }
+
+  // Recalcular % con opción C: F=-100%, T=-50%, E=-100%
+  const total = resultado.sesiones.length || 54;
+  resultado.pct = ((resultado.asiste + resultado.tardes * 0.5) / total) * 100;
+
+  // Estado
+  if (resultado.faltas >= 3 || resultado.pct < 90)
+    resultado.estado = "🔴 EN RIESGO";
+  else if (resultado.pct >= 95)
+    resultado.estado = "✅ BUENO";
+  else
+    resultado.estado = "🟡 REGULAR";
+
+  return resultado;
+}
+
+// ── LOGIN ─────────────────────────────────────────────────────
+document.getElementById("inp").addEventListener("keyup", e => {
+  if (e.key === "Enter") ingresar();
+});
+
+async function ingresar() {
+  const doc = document.getElementById("inp").value.replace(/\D/g,"").trim();
+  const errEl = document.getElementById("err");
+  const ap = APRENDICES.find(a => a.id === doc);
+  if (!ap) { errEl.classList.add("on"); return; }
+  errEl.classList.remove("on");
+  aprendiz = ap;
+
+  // Mostrar pantalla de carga
+  document.getElementById("pLogin").style.display = "none";
+  const pC = document.getElementById("pCarga");
+  pC.style.display = "flex";
+
+  // Cargar datos reales del Sheets
+  let datos;
+  try {
+    datos = await cargarDatos(doc);
+    localStorage.setItem("cache_" + doc, JSON.stringify({
+      datos, ts: Date.now()
+    }));
+  } catch(e) {
+    // Intentar caché
+    const cache = localStorage.getItem("cache_" + doc);
+    if (cache) {
+      datos = JSON.parse(cache).datos;
+      datos._desdecache = true;
+    } else {
+      datos = { faltas:0,tardes:0,excusas:0,asiste:0,pct:100,
+                estado:"✅ BUENO",sesiones:[],ok:false };
+    }
+  }
+  datosCache = datos;
+  localStorage.setItem("ultimo_doc", doc);
+
+  pC.style.display = "none";
+  mostrarApp();
+}
+
+function salir() {
+  aprendiz = null; datosCache = null;
+  document.getElementById("pApp").style.display = "none";
+  document.getElementById("pLogin").style.display = "flex";
+  document.getElementById("inp").value = "";
+}
+
+// ── MOSTRAR APP ───────────────────────────────────────────────
+function mostrarApp() {
+  document.getElementById("pApp").style.display = "block";
+  const d = datosCache;
+
+  document.getElementById("hNombre").textContent =
+    aprendiz.nombre.split(" ").slice(0,2).join(" ");
+  document.getElementById("hDoc").textContent = "C.C. " + aprendiz.id;
+  document.getElementById("hAct").textContent =
+    "Actualizado: " + new Date().toLocaleString("es-CO",
+      {day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit"});
+
+  if (!d.ok || d._desdecache)
+    document.getElementById("errConn").classList.add("on");
+
+  const pct = Math.min(d.pct, 100);
+  const pctStr = pct.toFixed(1) + "%";
+  const color = d.estado.includes("BUENO")   ? "var(--verde)"
+              : d.estado.includes("REGULAR") ? "var(--amarillo)"
+              :                                "var(--rojo)";
+
+  document.getElementById("mPct").textContent   = pctStr;
+  document.getElementById("mPct").style.color   = color;
+  document.getElementById("mBarra").style.width = pct + "%";
+  document.getElementById("mBarra").style.background = color;
+
+  const badge = document.getElementById("mEstado");
+  badge.textContent = d.estado;
+  badge.className   = "estado-badge " +
+    (d.estado.includes("BUENO")   ? "eb-bueno"
+   : d.estado.includes("REGULAR") ? "eb-regular"
+   :                                "eb-riesgo");
+
+  document.getElementById("mF").textContent = d.faltas;
+  document.getElementById("mT").textContent = d.tardes;
+  document.getElementById("mE").textContent = d.excusas;
+  document.getElementById("mA").textContent = d.asiste;
+
+  tab("novedades");
+}
+
+// ── TABS ──────────────────────────────────────────────────────
+function tab(cual) {
+  ["novedades","historial","info"].forEach(t => {
+    document.getElementById("tab"+t[0].toUpperCase()+t.slice(1,2))
+      ?.classList.toggle("on", t===cual);
+  });
+  // Fix IDs
+  document.getElementById("tabN").classList.toggle("on", cual==="novedades");
+  document.getElementById("tabH").classList.toggle("on", cual==="historial");
+  document.getElementById("tabI").classList.toggle("on", cual==="info");
+
+  const cont = document.getElementById("tabCont");
+  cont.innerHTML = "";
+  if (cual==="novedades") renderNovedades(cont);
+  else if (cual==="historial") renderHistorial(cont);
+  else renderInfo(cont);
+}
+
+function iconoInfo(val) {
+  if (val==="F") return {ico:"❌",ic:"i-falta", tag:"Falta",    tc:"tg-falta"};
+  if (val==="T") return {ico:"⏰",ic:"i-tarde",  tag:"Tarde",   tc:"tg-tarde"};
+  if (val==="E") return {ico:"📄",ic:"i-excusa", tag:"Excusa",  tc:"tg-excusa"};
+  return           {ico:"✔", ic:"i-ok",    tag:"Asistió", tc:"tg-ok"};
+}
+
+function renderNovedades(cont) {
+  const novs = (datosCache.sesiones || [])
+    .filter(s => s.val !== "✔").reverse();
+
+  if (novs.length === 0) {
+    cont.innerHTML = `<div class="vacio"><div class="vacio-ico">🎉</div>
+      ¡Sin novedades! Asistencia perfecta hasta ahora.</div>`;
+    return;
+  }
+  const h = document.createElement("div");
+  h.className = "sec-titulo";
+  h.textContent = `${novs.length} novedad${novs.length>1?"es":""} registrada${novs.length>1?"s":""}`;
+  cont.appendChild(h);
+
+  novs.forEach((s,i) => {
+    const {ico,ic,tag,tc} = iconoInfo(s.val);
+    const el = document.createElement("div");
+    el.className = "item au";
+    el.style.animationDelay = (i*.06)+"s";
+    el.innerHTML = `<div class="item-ico ${ic}">${ico}</div>
+      <div class="item-info">
+        <div class="item-fecha">${s.label}</div>
+        <div class="item-mes">${s.mes} 2026</div>
+      </div>
+      <span class="item-tag ${tc}">${tag}</span>`;
+    cont.appendChild(el);
+  });
+}
+
+function renderHistorial(cont) {
+  const sess = datosCache.sesiones || [];
+  const meses = [...new Set(sess.map(s=>s.mes))];
+  if (sess.length === 0) {
+    cont.innerHTML = `<div class="vacio"><div class="vacio-ico">📭</div>No hay sesiones cargadas aún.</div>`;
+    return;
+  }
+  meses.forEach(mes => {
+    const h = document.createElement("div");
+    h.className = "sec-titulo"; h.textContent = mes + " 2026";
+    cont.appendChild(h);
+    sess.filter(s=>s.mes===mes).reverse().forEach((s,i) => {
+      const {ico,ic,tag,tc} = iconoInfo(s.val);
+      const el = document.createElement("div");
+      el.className = "item au";
+      el.style.animationDelay = (i*.04)+"s";
+      el.innerHTML = `<div class="item-ico ${ic}">${ico}</div>
+        <div class="item-info"><div class="item-fecha">${s.label}</div></div>
+        <span class="item-tag ${tc}">${tag}</span>`;
+      cont.appendChild(el);
+    });
+  });
+}
+
+function renderInfo(cont) {
+  const d = datosCache;
+  cont.innerHTML = `
+  <div class="info-card">
+    <h3>📚 Programa de formación</h3>
+    <div class="info-fila"><span>Programa</span><span style="text-align:right;max-width:58%;font-size:12px">Tecnología Instrumentación y Control</span></div>
+    <div class="info-fila"><span>Ficha</span><span>3490221</span></div>
+    <div class="info-fila"><span>Centro</span><span>CIDT Santander</span></div>
+    <div class="info-fila"><span>Instructor</span><span>Emerso Villa</span></div>
+    <div class="info-fila"><span>Jornada</span><span>Mañana</span></div>
+    <div class="info-fila"><span>Período</span><span>28 May – 20 Ago 2026</span></div>
+    <div class="info-fila"><span>Total sesiones</span><span>54</span></div>
+  </div>
+  <div class="info-card">
+    <h3>📊 Mi resumen actual</h3>
+    <div class="info-fila"><span>Sesiones registradas</span><span>${d.sesiones.length}</span></div>
+    <div class="info-fila"><span>Asistencias ✔</span><span class="ca">${d.asiste}</span></div>
+    <div class="info-fila"><span>Faltas F</span><span class="cf">${d.faltas}</span></div>
+    <div class="info-fila"><span>Tardanzas T</span><span class="ct">${d.tardes}</span></div>
+    <div class="info-fila"><span>Excusas E</span><span class="ce">${d.excusas}</span></div>
+    <div class="info-fila"><span>% Asistencia</span><span>${d.pct.toFixed(1)}%</span></div>
+  </div>
+  <div class="info-card">
+    <h3>📏 Escala de estados</h3>
+    <div class="info-fila"><span>✅ Bueno</span><span>≥ 95%</span></div>
+    <div class="info-fila"><span>🟡 Regular</span><span>90% – 94%</span></div>
+    <div class="info-fila"><span>🔴 En riesgo</span><span>&lt; 90% o 3+ faltas</span></div>
+    <div class="info-fila"><span>Tardanza descuenta</span><span>50% de la sesión</span></div>
+    <div class="info-fila"><span>Falta / Excusa</span><span>100% de la sesión</span></div>
+  </div>`;
+}
+
+// ── AUTO-LOGIN ────────────────────────────────────────────────
+window.addEventListener("load", async () => {
+  const ult = localStorage.getItem("ultimo_doc");
+  if (ult) {
+    const ap = APRENDICES.find(a => a.id === ult);
+    if (ap) {
+      aprendiz = ap;
+      document.getElementById("pLogin").style.display = "none";
+      const pC = document.getElementById("pCarga");
+      pC.style.display = "flex";
+      try {
+        datosCache = await cargarDatos(ult);
+        localStorage.setItem("cache_"+ult, JSON.stringify({datos:datosCache,ts:Date.now()}));
+      } catch(e) {
+        const c = localStorage.getItem("cache_"+ult);
+        datosCache = c ? JSON.parse(c).datos : {faltas:0,tardes:0,excusas:0,asiste:0,pct:100,estado:"✅ BUENO",sesiones:[],ok:false};
+        datosCache._desdecache = true;
+      }
+      pC.style.display = "none";
+      mostrarApp();
+    }
+  }
+});
+</script>
+</body>
+</html>
